@@ -3,10 +3,15 @@
 This is my project report on the python game: Aim Trainer, a simple reaction-based game where you have to click shapes. This project report will include the programming practises that I took in this project and the OOP principles utilised in my code.
 
 ### Programming Practices
+
+---
  
 #### Clear and uncluttered mainline
 
 **Code Use:**
+
+The mainline is kept short and focused on setting up the GUI. It creates the window and adds a heading and a start button. It then starts the Tkinter event loop. All the actual game mechanics – spawning shapes, handling clicks, scoring, difficulty – are hidden inside the Game class and its methods. The mainline only deals with UI setup. In my code, if the user clicks "Start Game", the Game.start() method takes over, keeping the mainline free from complex logic.
+
 ```python
 menu = tk.Tk()
 menu.title('Aim Trainer')
@@ -23,10 +28,16 @@ my_button.pack(pady=20)
 menu.mainloop()
 
 ```
+
+---
 #### One logical task per subroutine
+---
 #### Use of stubs
+---
 #### Use of control structures and data structures
+---
 #### Ease of maintenance
+---
 
  
 OOP principles:
