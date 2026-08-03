@@ -7,7 +7,7 @@ Types I can spawn:
 - Triangle
 - Octagon
 
-## Data Store: Shapes List (what's on screen right now)
+## Data Store: Shapes List
 
 | Shape ID | Type   | X   | Y   |
 |----------|--------|-----|-----|
@@ -25,7 +25,7 @@ Types I can spawn:
 
 # Desk Check
 
-## Run 1 — I click the mouse
+## Run when I click the mouse
 
 | Step | What just happened | Shapes List | On screen |
 |------|--------------------|-------------|-----------|
@@ -34,11 +34,3 @@ Types I can spawn:
 | 3 | Gave it X=250, Y=180 | Circle, Square, Triangle | Circle, Square |
 | 4 | Canvas updated | Circle, Square, Triangle | Circle, Square, Triangle |
 
-## Run 2 — I click again
-
-| Step | What just happened | Shapes List | On screen |
-|------|--------------------|-------------|-----------|
-| 1 | Nothing yet | Circle, Square, Triangle | Circle, Square, Triangle |
-| 2 | Random pick → Octagon | Circle, Square, Triangle | Circle, Square, Triangle |
-| 3 | Gave it X=400, Y=100 | Circle, Square, Triangle, Octagon | Circle, Square, Triangle |
-| 4 | Canvas updated | Circle, Square, Triangle, Octagon | Circle, Square, Triangle, Octagon |
