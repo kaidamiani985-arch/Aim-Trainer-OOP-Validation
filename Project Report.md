@@ -217,7 +217,7 @@ class Game:
 ```
 ---
 ## Façade pattern
-The `Game` class is a façade patern, to the more complicated tkinter system. Instead of the user needing to create windows to start the game they can simply call game.start()
+The `Game` class is a façade patern, to the more complicated tkinter system. Instead of the user needing to create windows to start the game they can simply call `game.start()`
 #### Code Example:
 
 ```python
