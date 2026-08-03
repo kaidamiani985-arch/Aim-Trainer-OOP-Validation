@@ -66,3 +66,25 @@ User sees the existing Circle and Square, plus the new Triangle.
 | 4 | Sends all 4 shapes to Canvas |
 
 **Result:** Circle, Square, Triangle, and Octagon all on screen.
+
+# Desk Check
+
+**Test:** User clicks mouse to spawn a shape.
+
+| Step | Action | Shapes (available) | Shapes List (on screen) | Canvas shows |
+|------|--------|---------------------|--------------------------|--------------|
+| 1 | Start | Circle, Square, Triangle, Octagon | Circle, Square | Circle, Square |
+| 2 | Spawn Shape picks random type → Triangle | Circle, Square, Triangle, Octagon | Circle, Square | Circle, Square |
+| 3 | Create Triangle object at random X,Y | Circle, Square, Triangle, Octagon | Circle, Square, Triangle | Circle, Square |
+| 4 | Send Shapes List to Canvas | Circle, Square, Triangle, Octagon | Circle, Square, Triangle | Circle, Square, Triangle |
+
+---
+
+**Test:** User clicks again.
+
+| Step | Action | Shapes (available) | Shapes List (on screen) | Canvas shows |
+|------|--------|---------------------|--------------------------|--------------|
+| 1 | Start | Circle, Square, Triangle, Octagon | Circle, Square, Triangle | Circle, Square, Triangle |
+| 2 | Spawn Shape picks → Octagon | Circle, Square, Triangle, Octagon | Circle, Square, Triangle | Circle, Square, Triangle |
+| 3 | Create Octagon at random X,Y | Circle, Square, Triangle, Octagon | Circle, Square, Triangle, Octagon | Circle, Square, Triangle |
+| 4 | Send to Canvas | Circle, Square, Triangle, Octagon | Circle, Square, Triangle, Octagon | Circle, Square, Triangle, Octagon |
