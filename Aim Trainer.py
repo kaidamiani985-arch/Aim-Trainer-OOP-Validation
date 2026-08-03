@@ -1,12 +1,10 @@
 import tkinter as tk
-from tkinter import *
 import random
 import time
-spawn_speed = 1100
-score = 0
 
 
 class Shape:
+#Base class for every shape
     def __init__(self, canvas, x, y, size, reward, lifetime):
         self.canvas = canvas
         self.x = x
@@ -17,21 +15,30 @@ class Shape:
         self.id = None
         self.spawn_time = time.time()
 
+    def label(self):
+        return "Shape"
+#Name of this shape (polymorphic)
+
 class Circle(Shape):
     def __init__(self, canvas, x, y, size, reward, lifetime):
         super().__init__(canvas, x - size / 2, y - size / 2, size, reward, lifetime)
         self.id = self.canvas.create_oval(self.x, self.y, self.x + self.size, self.y + self.size, fill='blue', outline='black')
 
+    def label(self):
+        return "Circle"
+
+
 class Polygon(Shape):
+    """Base class for straight-edged shapes. Stores how many sides it has."""
+
     def __init__(self, canvas, x, y, size, reward, lifetime, sides):
         super().__init__(canvas, x, y, size, reward, lifetime)
+        self.sides = sides
+
 
 class Octagon(Polygon):
-
     def __init__(self, canvas, x, y, size, reward, lifetime):
-
         super().__init__(canvas, x, y, size, reward, lifetime, 8)
-
         self.proper_size = size / 2
         x1 = self.x - self.proper_size
         y1 = self.y - self.proper_size / 2
@@ -51,6 +58,10 @@ class Octagon(Polygon):
         y8 = self.y + self.proper_size / 2
         self.id = self.canvas.create_polygon(x1, y1, x2, y2, x3, y3, x4, y4, x5, y5, x6, y6, x7, y7, x8, y8, fill='red', outline='black')
 
+    def label(self):
+        return "Octagon"
+
+
 class Triangle(Polygon):
     def __init__(self, canvas, x, y, size, reward, lifetime):
         super().__init__(canvas, x, y, size, reward, lifetime, 3)
@@ -63,6 +74,9 @@ class Triangle(Polygon):
         y3 = self.y + self.proper_size
         self.id = self.canvas.create_polygon(x1, y1, x2, y2, x3, y3, fill='purple', outline='black')
 
+    def label(self):
+        return "Triangle"
+
 
 class Square(Polygon):
     def __init__(self, canvas, x, y, size, reward, lifetime):
@@ -74,11 +88,16 @@ class Square(Polygon):
         y2 = self.y + self.proper_size
         self.id = self.canvas.create_rectangle(x1, y1, x2, y2, fill='green', outline='black')
 
+    def label(self):
+        return "Square"
+
+
 Shapes = [Circle, Square, Triangle, Octagon]
-all_shapes = []
-spawn_speed = 1100
+
 
 class Game:
+#Is the game windowm canvas, and the list of currently-spawned shapes."""
+
     def __init__(self):
         self.win = None
         self.canvas = None
@@ -88,20 +107,26 @@ class Game:
         self.menu = None
 
     def mouse_click(self, event):
+        #Checks if the click landed on a shape
         clicked_items = self.canvas.find_overlapping(event.x, event.y, event.x, event.y)
         for shape in self.shapes:
             if shape.id in clicked_items:
                 reaction_time = time.time() - shape.spawn_time
-                points = max(0, int(10 - reaction_time * 10))
+                points = max(0, int(10 - reaction_time * 10)) * shape.reward
                 self.score += points
+                print(f"Hit a {shape.label()}! +{points} points") #(polymorphysm)
                 self.canvas.delete(shape.id)
 
-    def spawn_shape(self):
+    def increase_difficulty(self):
+        # Shortens the spawn time to increase diffuculty
         if self.spawn_speed > 350:
             self.spawn_speed = int(self.spawn_speed / 1.01)
         else:
             self.end_screen()
-            
+
+    def spawn_shape(self):
+        # Spawns random shape at random position
+        self.increase_difficulty()
         x = random.randint(100, 850)
         y = random.randint(100, 850)
         shapes_class = Shapes[random.randint(0, len(Shapes) - 1)]
@@ -133,7 +158,6 @@ class Game:
         self.win.after(self.spawn_speed, self.spawn_shape)
         self.win.mainloop()
 
-    
 
 menu = tk.Tk()
 menu.title('Aim Trainer')
@@ -143,15 +167,8 @@ heading_label.pack(pady=100)
 game = Game()
 game.menu = menu
 my_button = tk.Button(
-    menu, 
+    menu,
     text="Start Game",
     command=game.start)
 my_button.pack(pady=20)
 menu.mainloop()
-
-    
-
-
-
-
-
