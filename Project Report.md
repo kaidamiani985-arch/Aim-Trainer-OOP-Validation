@@ -73,11 +73,31 @@ def spawn_shape(self):
 I improved the program by moving the difficulty code into its own sub-routine called `increase_difficulty()`. Now, `spawn_shape()` only focuses on creating and scheduling new shapes, while `increase_difficulty()` only manages how quickly shapes appear and determines when the game should end.
 
 ---
-#### Use of stubs
----
 #### Use of control structures and data structures
+
+```python
+Shapes = [Circle, Square, Triangle, Octagon]
+
+shape_class = Shapes[random.randint(0, len(Shapes) - 1)]
+```
+
+This code demonstrates the use of a data structure and a control structure in my program. The Shapes list is a data structure that stores all possible shape classes that can appear in the game. The random selection acts as a control structure by deciding which shape will be created when spawn_shape() is called.
+
 ---
 #### Ease of maintenance
+
+```python
+class Shape:
+    def __init__(self, canvas, x, y, size, reward, lifetime):
+        self.canvas = canvas
+        self.size = size
+
+class Square(Polygon):
+    def label(self):
+        return "Square"
+```
+This code improves the ease of maintenance because common properties of all shapes are stored in the parent `Shape` class instead of being repeated in every individual shape class. For example, attributes such as `canvas` and `size` are inherited by `Square`, `Circle`, `Triangle`, and `Octagon`. If a feature needs to be changed, it only needs to be updated in the `Shape` class. 
+
 ---
 
  
