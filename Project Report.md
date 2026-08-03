@@ -5,6 +5,24 @@ This is my project report on the python game: Aim Trainer, a simple reaction-bas
 ### Programming Practices
  
 #### Clear and uncluttered mainline
+
+**Code Use:**
+'''python
+menu = tk.Tk()
+menu.title('Aim Trainer')
+canvas = tk.Canvas(menu, width=400, height=0, bg='white')
+heading_label = tk.Label(menu, text="Aim Trainer", font=("Helvetica", 36, "bold"))
+heading_label.pack(pady=100)
+game = Game()
+game.menu = menu
+my_button = tk.Button(
+    menu,
+    text="Start Game",
+    command=game.start)
+my_button.pack(pady=20)
+menu.mainloop()
+
+'''
 #### One logical task per subroutine
 #### Use of stubs
 #### Use of control structures and data structures
