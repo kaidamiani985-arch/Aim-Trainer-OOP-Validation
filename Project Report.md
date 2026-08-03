@@ -10,7 +10,7 @@ This is my project report on the python game: Aim Trainer, a simple reaction-bas
 
 **Code Use:**
 
-The mainline is kept short and focused on setting up the GUI. It creates the window and adds a heading and a start button. It then starts the Tkinter event loop. All the actual game mechanics – spawning shapes, handling clicks, scoring, difficulty – are hidden inside the Game class and its methods. The mainline only deals with UI setup. In my code, if the user clicks "Start Game", the Game.start() method takes over, keeping the mainline free from complex logic.
+The mainline is kept short and focused on setting up the GUI. It creates the window and adds a heading and a start button. It then starts the Tkinter event loop. All the actual game mechanics – spawning shapes, handling clicks, scoring, difficulty are hidden inside the Game class and its methods. The mainline only deals with UI setup. In my code, if the user clicks `Start Game`, the `Game.start()` method takes over, keeping the mainline clean.
 
 ```python
 menu = tk.Tk()
@@ -31,6 +31,47 @@ menu.mainloop()
 
 ---
 #### One logical task per subroutine
+
+In my original code, the `spawn_shape()` sub-routine was responsible for both increasing the game's difficulty and spawning a new shape. This meant the function was performing two separate logical tasks, making it longer and less organised.
+
+#### Old Code:
+
+```python
+def spawn_shape(self):
+    if self.spawn_speed > 350:
+        self.spawn_speed = int(self.spawn_speed / 1.01)
+    else:
+        self.end_screen()
+
+    x = random.randint(100, 850)
+    y = random.randint(100, 850)
+    shapes_class = Shapes[random.randint(0, len(Shapes) - 1)]
+    shape = shapes_class(self.canvas, x, y, 100, 1, 10)
+    self.shapes.append(shape)
+    self.win.after(self.spawn_speed, self.spawn_shape)
+```
+#### New Code:
+
+```python
+def increase_difficulty(self):
+    # Shortens the spawn time to increase difficulty
+    if self.spawn_speed > 350:
+        self.spawn_speed = int(self.spawn_speed / 1.01)
+    else:
+        self.end_screen()
+
+def spawn_shape(self):
+    self.increase_difficulty()
+
+    x = random.randint(100, 850)
+    y = random.randint(100, 850)
+    shapes_class = Shapes[random.randint(0, len(Shapes) - 1)]
+    shape = shapes_class(self.canvas, x, y, 100, 1, 10)
+    self.shapes.append(shape)
+    self.win.after(self.spawn_speed, self.spawn_shape)
+```
+I improved the program by moving the difficulty code into its own sub-routine called `increase_difficulty()`. Now, `spawn_shape()` only focuses on creating and scheduling new shapes, while `increase_difficulty()` only manages how quickly shapes appear and determines when the game should end.
+
 ---
 #### Use of stubs
 ---
