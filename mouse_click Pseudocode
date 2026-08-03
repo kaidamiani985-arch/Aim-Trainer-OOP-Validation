@@ -1,0 +1,16 @@
+BEGIN mouseClick(event)
+    clickedItems = list of shape IDs at the clicked position
+    FOR each shape IN shapesList
+        IF shape's ID is in clickedItems THEN
+            reactionTime = currentTime - shape's spawnTime
+            points = 10 - (reactionTime * 10)
+            IF points < 0 THEN
+                points = 0
+            END IF
+            points = points * shape's reward
+            score = score + points
+            output "Hit a " + shape's label + "! +" + points + " points"
+            remove shape from canvas
+        END IF
+    NEXT shape
+END mouseClick
