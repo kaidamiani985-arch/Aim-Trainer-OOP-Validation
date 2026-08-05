@@ -38,12 +38,12 @@ In my original code, the `spawn_shape()` sub-routine was responsible for both in
 
 ```python
 def spawn_shape(self):
-    if self.spawn_speed > 350:
+    if self.spawn_speed > 350: # Spawn speed increase
         self.spawn_speed = int(self.spawn_speed / 1.01)
     else:
         self.end_screen()
 
-    x = random.randint(100, 850)
+    x = random.randint(100, 850) # Spawning Shape
     y = random.randint(100, 850)
     shapes_class = Shapes[random.randint(0, len(Shapes) - 1)]
     shape = shapes_class(self.canvas, x, y, 100, 1, 10)
@@ -53,14 +53,14 @@ def spawn_shape(self):
 #### New Code:
 
 ```python
-def increase_difficulty(self):
+def increase_difficulty(self): # Spawn speed increase
     # Shortens the spawn time to increase difficulty
     if self.spawn_speed > 350:
         self.spawn_speed = int(self.spawn_speed / 1.01)
     else:
         self.end_screen()
 
-def spawn_shape(self):
+def spawn_shape(self): # Spawning Shape
     self.increase_difficulty()
 
     x = random.randint(100, 850)
